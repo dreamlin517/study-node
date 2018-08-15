@@ -13,7 +13,6 @@ app.use(bodyParser.json());
 
 app.post('/upload', function (req, res) {
     const form = new formidable.IncomingForm();
-
     form.uploadDir = path.join(process.cwd(), 'public/images');
     const rand = sd.format(new Date(), 'YYYYMMDDHHmm') + Math.floor((Math.random() * 10000));
 
