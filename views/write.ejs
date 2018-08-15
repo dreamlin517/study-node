@@ -15,23 +15,23 @@
 
 <body>
     <div class="container-fluid">
-        <% include parials/header %>
+            <% include parials/header %>
     </div>
     <div class="container">
-        <div class="clearfix" style="margin-bottom: 15px;">
-          <a class="btn btn-info pull-right" href="write">新增</a>
+        <form action="/write" method="POST">
+            <div class="form-group">
+                <label class="sr-only">新增文章标题</label>
+                <input type="text"  name="title" class="form-control" placeholder="新增文章标题">
+            </div>
+            <div class="form-group">
+                    <label class="sr-only">新增文章内容</label>
+                    <textarea  class="form-control" name="content"  rows="30" placeholder="新增文章内容"></textarea>
+                </div>
+
+            <button type="submit" class="btn btn-info  pull-right">提交</button>
+        </form>
     </div>
-        <ul class="list-group"> 
-            <% for (var i =0; i < articles.length; i++){%>
-                <li class="list-group-item">
-                    <a href="/blog/<%= articles[i].title %>">
-                        <%= articles[i].title %> （
-                            <%= articles[i].date %>）
-                    </a>
-                </li>
-                <% } %>
-        </ul>
-    </div>
+
 </body>
 
 </html>

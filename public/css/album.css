@@ -1,0 +1,16 @@
+.btns{
+    border: 1px solid red;
+}
+
+.pic{
+    width: 32%;
+    height: 400px;
+    border: 1px solid #696969;
+    float: left;
+    padding: 5px 5px;
+    margin-right: 2px;
+}
+.pic img{
+    height: 100%;
+    width: 100%;
+}
