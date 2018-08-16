@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="/js/article.js"></script>
     <title>
         <%= post.title %>
     </title>
@@ -19,14 +23,17 @@
             <h1>
                 <%= post.title %>
             </h1>
-            <small>
+            <h5>
                 <span>作者：
                     <%= post.author %>
                 </span> |
                 <span>日期：
                     <%= post.date %>
                 </span>
-            </small>
+                <a style="cursor: pointer;" onclick="deleteModal()">
+                    删除文章
+                </a>
+            </h5>
 
             <div style="border: 1px solid #696969; padding: 15px;">
                 <p class="text-success">
@@ -34,6 +41,20 @@
                 </p>
             </div>
         </div>
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p> 确认删除？</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" onclick="ensuerDelete('<%= post.title %>')">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 </body>
 
 </html>

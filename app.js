@@ -48,6 +48,19 @@ app.get('/blog/:title', function (req, res) {
     }
 
 });
+app.delete('/article', function (req, res) {
+    const title = req.body.title;
+
+    const stream = fs.readFileSync(path.join(process.cwd(),'public/articles/index.json'));
+    const str = stream.toString();
+    let articles = JSON.parse(str);
+
+    articles = articles.filter(item => item.title !==  title);
+
+    fs.writeFileSync(path.join(process.cwd(),'public/articles/index.json'), JSON.stringify(articles, null, 4));
+
+    res.end();
+});
 
 app.get('/write',function (req, res) {
 res.render('write');
