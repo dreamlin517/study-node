@@ -63,7 +63,17 @@ app.delete('/article', function (req, res) {
 });
 
 app.get('/write',function (req, res) {
-res.render('write');
+    const title = req.query.title;
+    console.log(title);
+
+    const stream = fs.readFileSync(path.join(process.cwd(),'public/articles/index.json'));
+    const str = stream.toString();
+    const articles = JSON.parse(str);
+
+    const article = articles.find(item => title === item.title);
+
+
+    res.render('write', { post: article });
 });
 
 app.post('/write', function (req, res) {
@@ -73,9 +83,22 @@ app.post('/write', function (req, res) {
 
     const stream = fs.readFileSync(path.join(process.cwd(), 'public/articles/index.json'));
     const str = stream.toString();
-    const articles = JSON.parse(str);
+    let articles = JSON.parse(str);
 
-    articles.unshift(article);
+    if(article.id) {
+        articles = articles.map( item =>{
+            if (item.id === article.id) { 
+                item.title = article.title
+                item.content = article.content
+            } 
+            return item
+        }
+
+        )
+    } else {
+        articles.unshift(article);
+    } 
+
     fs.writeFileSync(path.join(process.cwd(), 'public/articles/index.json'),JSON.stringify(articles, null,4));
 
     res.redirect('/blog');
